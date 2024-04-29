@@ -1,13 +1,16 @@
-package common.data;
+package models;
+
+import utility.Validatable;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.util.Objects;
 
 /**
  * Основной класс Коллекции.
  * Коллекция состоит из экземпляров этого класса StudyGroup
  */
-public class StudyGroup implements Comparable<StudyGroup>, Serializable {
+public class StudyGroup implements Comparable<StudyGroup>, Validatable, Serializable {
     private int id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
@@ -30,17 +33,13 @@ public class StudyGroup implements Comparable<StudyGroup>, Serializable {
         this.groupAdmin = groupAdmin;
     }
 
-    public StudyGroup(String name, Coordinates coordinates, Long studentsCount, long transferredStudents,
-                         Long averageMark, Semester semesterEnum, Person groupAdmin) {
-        this.name = name;
-        this.coordinates = coordinates;
-        this.studentsCount = studentsCount;
-        this.transferredStudents = transferredStudents;
-        this.averageMark = averageMark;
-        this.semesterEnum = semesterEnum;
-        this.groupAdmin = groupAdmin;
+    @Override
+    public boolean validate() {
+        return (id > 0) && (name != null && !name.isEmpty())
+                && (coordinates != null) && (creationDate != null)
+                && (studentsCount > 0) && (transferredStudents > 0)
+                && (averageMark > 0) && (semesterEnum != null) && (groupAdmin != null);
     }
-    public StudyGroup() {}
 
     /**
      * Получить id учебной группы
@@ -218,5 +217,18 @@ public class StudyGroup implements Comparable<StudyGroup>, Serializable {
                 ", transferredStudents = " + transferredStudents +
                 ", groupAdmin = " + groupAdmin;
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        StudyGroup that = (StudyGroup) o;
+        return id == that.id && transferredStudents == that.transferredStudents && Objects.equals(name, that.name) && Objects.equals(coordinates, that.coordinates) && Objects.equals(creationDate, that.creationDate) && Objects.equals(studentsCount, that.studentsCount) && Objects.equals(averageMark, that.averageMark) && semesterEnum == that.semesterEnum && Objects.equals(groupAdmin, that.groupAdmin);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, coordinates, creationDate, studentsCount, transferredStudents, averageMark, semesterEnum, groupAdmin);
     }
 }

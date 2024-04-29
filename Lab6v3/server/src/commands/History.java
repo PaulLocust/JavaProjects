@@ -1,20 +1,22 @@
-package server.commands.concreteCommands;
+package commands;
 
-import common.exceptions.WrongAmountOfElementsException;
-import server.commands.auxillary.AbstractCommand;
-import server.utility.ResponseOutputer;
+
+import commands.auxillary.AbstractCommand;
+import exceptions.WrongAmountOfElementsException;
+import utility.ResponseOutputer;
 
 /**
- * Выход из приложения
+ * Класс для показа истории ввода команд
  */
-public class Exit extends AbstractCommand {
+public class History extends AbstractCommand {
 
-    public Exit() {
-        super("exit", "","End the program (without saving to a file).");
+
+    public History() {
+        super("history", "","Print the last 15 commands (without their arguments).");
     }
 
     /**
-     * Метод для выхода из приложения
+     * Метод для показа истории последних 15 команд, введённых в консоль приложения
      * @param stringArgument аргумент команды, введённой пользователем
      * @param objectArgument сериализованный объект класса StudyGroup, введённой пользователем
      * @return ответ на правильное исполнение команды
@@ -23,11 +25,11 @@ public class Exit extends AbstractCommand {
     public boolean execute(String stringArgument, Object objectArgument) {
         try {
             if (!stringArgument.isEmpty() || objectArgument != null) throw new WrongAmountOfElementsException();
-            return true;
         } catch (WrongAmountOfElementsException exception) {
             ResponseOutputer.appendLn("Usage: '" + getName() + " " + getUsage() + "'");
         }
-        return false;
+        return true;
     }
+
 
 }

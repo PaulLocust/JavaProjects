@@ -1,17 +1,17 @@
-package server;
 
-import server.commands.concreteCommands.*;
-import server.utility.CollectionFileManager;
-import server.utility.CollectionManager;
-import server.utility.CommandManager;
-import server.utility.RequestHandler;
+
+import commands.*;
+import utility.CollectionFileManager;
+import utility.CollectionManager;
+import utility.CommandManager;
+import utility.RequestHandler;
+
 import java.util.logging.Logger;
 
 public class App {
 
-    public static final int PORT = 1824;
-    public static final int CONNECTION_TIMEOUT = 60 * 1000;
-    public static final Logger logger = Logger.getLogger("ServerLogger");
+    public static final int PORT = 1821;
+
 
 
     public static void main(String[] args) {
@@ -39,7 +39,7 @@ public class App {
                 new ServerExitCommand()
         );
         RequestHandler requestHandler = new RequestHandler(commandManager);
-        Server server = new Server(PORT, CONNECTION_TIMEOUT, requestHandler);
+        Server server = new Server(PORT, requestHandler);
         server.run();
     }
 }

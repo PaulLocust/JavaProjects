@@ -1,16 +1,16 @@
-package client.utility;
 
-import client.App;
-import common.data.Coordinates;
-import common.data.Person;
-import common.data.Semester;
-import common.data.StudyGroup;
-import common.exceptions.CommandUsageException;
-import common.exceptions.IncorrectInputInScriptException;
-import common.exceptions.ScriptRecursionException;
-import common.interaction.Request;
-import common.interaction.ResponseResult;
-import common.utility.Outputer;
+
+import exceptions.CommandUsageException;
+import exceptions.IncorrectInputInScriptException;
+import exceptions.ScriptRecursionException;
+import interaction.Request;
+import interaction.ResponseResult;
+import models.Coordinates;
+import models.Person;
+import models.Semester;
+import models.StudyGroup;
+import utility.Outputer;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.NoSuchElementException;
@@ -138,7 +138,7 @@ public class UserHandler {
                     return ProcessingResult.SCRIPT;
                 }
                 case "remove_greater", "remove_lower" -> {
-                    if (commandArgument.isEmpty()) throw new CommandUsageException("<value>");
+                    if (commandArgument.isEmpty()) throw new CommandUsageException("<target_id>");
                 }
                 case "remove_by_id" -> {
                     if (commandArgument.isEmpty()) throw new CommandUsageException("<id>");
@@ -147,7 +147,7 @@ public class UserHandler {
                     if (commandArgument.isEmpty()) throw new CommandUsageException("<start_string>");
                 }
                 case "filter_less_than_students_count" -> {
-                    if (commandArgument.isEmpty()) throw new CommandUsageException("<id> {element}");
+                    if (commandArgument.isEmpty()) throw new CommandUsageException("<value_to_compare>");
                 }
                 case "update" -> {
                     if (commandArgument.isEmpty()) throw new CommandUsageException("<id> {element}");

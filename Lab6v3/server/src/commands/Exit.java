@@ -1,8 +1,9 @@
-package server.commands.concreteCommands;
+package commands;
 
-import common.exceptions.WrongAmountOfElementsException;
-import server.commands.auxillary.AbstractCommand;
-import server.utility.ResponseOutputer;
+
+import commands.auxillary.AbstractCommand;
+import exceptions.WrongAmountOfElementsException;
+import utility.ResponseOutputer;
 
 /**
  * Выход из приложения

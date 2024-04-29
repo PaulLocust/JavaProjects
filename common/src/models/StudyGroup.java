@@ -1,5 +1,6 @@
-package common.data;
+package models;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 
@@ -8,6 +9,8 @@ import java.time.ZonedDateTime;
  * Коллекция состоит из экземпляров этого класса StudyGroup
  */
 public class StudyGroup implements Comparable<StudyGroup>, Serializable {
+    @Serial
+    private static final long serialVersionUID = 6L;
     private int id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null

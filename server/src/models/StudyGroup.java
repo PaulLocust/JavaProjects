@@ -1,4 +1,4 @@
-package common.data;
+package models;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
@@ -30,16 +30,6 @@ public class StudyGroup implements Comparable<StudyGroup>, Serializable {
         this.groupAdmin = groupAdmin;
     }
 
-    public StudyGroup(String name, Coordinates coordinates, Long studentsCount, long transferredStudents,
-                         Long averageMark, Semester semesterEnum, Person groupAdmin) {
-        this.name = name;
-        this.coordinates = coordinates;
-        this.studentsCount = studentsCount;
-        this.transferredStudents = transferredStudents;
-        this.averageMark = averageMark;
-        this.semesterEnum = semesterEnum;
-        this.groupAdmin = groupAdmin;
-    }
     public StudyGroup() {}
 
     /**

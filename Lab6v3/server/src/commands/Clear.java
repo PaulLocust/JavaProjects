@@ -1,20 +1,24 @@
-package server.commands.concreteCommands;
+package commands;
 
-import common.exceptions.WrongAmountOfElementsException;
-import server.commands.auxillary.AbstractCommand;
-import server.utility.ResponseOutputer;
+
+import commands.auxillary.AbstractCommand;
+import exceptions.WrongAmountOfElementsException;
+import utility.CollectionManager;
+import utility.ResponseOutputer;
 
 /**
- * Выход из приложения
+ * Очистка коллекции
  */
-public class Exit extends AbstractCommand {
+public class Clear extends AbstractCommand {
+    private final CollectionManager collectionManager;
 
-    public Exit() {
-        super("exit", "","End the program (without saving to a file).");
+    public Clear(CollectionManager collectionManager) {
+        super("clear","","Clear the collection.");
+        this.collectionManager = collectionManager;
     }
 
     /**
-     * Метод для выхода из приложения
+     * Метод для очистки коллекции от всех элементов
      * @param stringArgument аргумент команды, введённой пользователем
      * @param objectArgument сериализованный объект класса StudyGroup, введённой пользователем
      * @return ответ на правильное исполнение команды
@@ -23,6 +27,8 @@ public class Exit extends AbstractCommand {
     public boolean execute(String stringArgument, Object objectArgument) {
         try {
             if (!stringArgument.isEmpty() || objectArgument != null) throw new WrongAmountOfElementsException();
+            collectionManager.clearCollection();
+            ResponseOutputer.appendLn("Collection was cleared");
             return true;
         } catch (WrongAmountOfElementsException exception) {
             ResponseOutputer.appendLn("Usage: '" + getName() + " " + getUsage() + "'");
@@ -30,4 +36,6 @@ public class Exit extends AbstractCommand {
         return false;
     }
 
+
 }
+
